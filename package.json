@@ -12,6 +12,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.19",
     "core-js": "^2.6.5",
+    "firebase": "^5.11.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6"
   },
@@ -33,7 +34,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

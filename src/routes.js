@@ -4,8 +4,21 @@ import Footer from './components/Footer'
 import Form from './components/Form'
 import Table from './components/Table'
 import User from './components/user/User'
+import UserList from './components/user/UserList'
+import UserDetail from './components/user/UserDetail'
+import Error from './components/Error'
+import LogIn from './components/LogIn'
+import SignUp from './components/SignUp'
 
 export const routes = [
+    {
+        path: '/log-in',
+        component: LogIn
+    },
+    {
+        path: '/sign-up',
+        component: SignUp
+    },
     {
         path: '',
         name: 'home',
@@ -33,11 +46,26 @@ export const routes = [
     },
     {
         path: '/user',
-        name: 'user',
         components: {
             default: User,
-            header: NavBar,
-            footer: Footer
-        }
+            header: NavBar
+        },
+        children: [
+            {
+                path: '',
+                component: UserList,
+                children: [
+                    {
+                        path: ':id',
+                        name: 'userList',
+                        component: UserDetail
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path: '*',
+        component: Error
     }
 ];
