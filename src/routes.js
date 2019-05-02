@@ -13,11 +13,17 @@ import SignUp from './components/SignUp'
 export const routes = [
     {
         path: '/log-in',
-        component: LogIn
+        component: LogIn,
+        meta: {
+            requiresGuest: true
+        }
     },
     {
         path: '/sign-up',
-        component: SignUp
+        component: SignUp,
+        meta: {
+            requiresGuest: true
+        }
     },
     {
         path: '',
@@ -26,6 +32,9 @@ export const routes = [
             default: SlideBar,
             header: NavBar,
             footer: Footer
+        },
+        meta: {
+            requiresAuth: true
         }
     },
     {
@@ -34,6 +43,9 @@ export const routes = [
         components: {
             default: Form,
             header: NavBar
+        },
+        meta: {
+            requiresAuth: true
         }
     },
     {
@@ -42,6 +54,9 @@ export const routes = [
         components: {
             default: Table,
             header: NavBar
+        },
+        meta: {
+            requiresAuth: true
         }
     },
     {
@@ -62,7 +77,10 @@ export const routes = [
                     }
                 ]
             }
-        ]
+        ],
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '*',

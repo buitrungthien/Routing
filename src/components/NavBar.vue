@@ -33,7 +33,7 @@
             <em>User</em>
           </template>
           <b-dropdown-item>Profile</b-dropdown-item>
-          <b-dropdown-item>Sign Out</b-dropdown-item>
+          <b-dropdown-item @click="logOut">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -41,12 +41,31 @@
 </template>
 
 <script>
-export default {};
+import firebase from "firebase";
+
+export default {
+  data() {
+    return {
+      isLoggedIn: false,
+      user: ""
+    };
+  },
+  methods: {
+    logOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("log-in");
+        });
+    }
+  }
+};
 </script>
 
 <style scoped>
 .fnt-20 {
-    font-size: 20px;
+  font-size: 20px;
 }
 .isActive span {
   color: orange;

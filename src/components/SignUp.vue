@@ -1,11 +1,11 @@
 <template>
   <div>
     <h5>Fill out these lines to create an account</h5>
-    <input type="text" placeholder="Email">
+    <input type="text" placeholder="Email" v-model="email">
     <br>
-    <input type="password" placeholder="Password">
+    <input type="password" placeholder="Password" v-model="password">
     <br>
-    <b-button class="btn-danger">Sign Up</b-button>
+    <b-button class="btn-danger" @click="register">Sign Up</b-button>
     <br>
     <p>
       You have an account?
@@ -17,7 +17,33 @@
 </template>
 
 <script>
-export default {};
+import firebase from "firebase";
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    register(event) {
+      event.preventDefault();
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            alert(`Account for ${user.user.email} created`);
+            this.$router.replace("/");
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -28,6 +54,6 @@ input {
   padding-left: 10px;
 }
 p {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 </style>
