@@ -17,16 +17,9 @@
           <span>User</span>
         </router-link>
       </b-navbar-nav>
-
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item>EN</b-dropdown-item>
-          <b-dropdown-item>ES</b-dropdown-item>
-          <b-dropdown-item>RU</b-dropdown-item>
-          <b-dropdown-item>FA</b-dropdown-item>
-        </b-nav-item-dropdown>
-
+        <span class="user">{{user}}</span>
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template slot="button-content">
@@ -46,9 +39,13 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      isLoggedIn: false,
       user: ""
     };
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.user = firebase.auth().currentUser.email;
+    }
   },
   methods: {
     logOut() {
@@ -56,7 +53,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.replace("log-in");
+          this.$router.replace("/log-in");
         });
     }
   }
@@ -64,6 +61,16 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (min-width: 900px) {
+  .user {
+    padding-top: 8px;
+    padding-right: 15px;
+  }
+}
+.user {
+    color: whitesmoke;
+    font-style: italic;
+  }
 .fnt-20 {
   font-size: 20px;
 }
